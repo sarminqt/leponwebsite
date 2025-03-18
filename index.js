@@ -93,7 +93,15 @@ function drawSnake(){
         ctx.strokeRect(snakePart.x, snakePart.y, unitSize, unitSize);
     });
 }
+const leftBtn = document.querySelector("#leftBtn");
+const upBtn = document.querySelector("#upBtn");
+const rightBtn = document.querySelector("#rightBtn");
+const downBtn = document.querySelector("#downBtn");
 
+leftBtn.addEventListener("click", () => changeDirection({ keyCode: 37 }));
+upBtn.addEventListener("click", () => changeDirection({ keyCode: 38 }));
+rightBtn.addEventListener("click", () => changeDirection({ keyCode: 39 }));
+downBtn.addEventListener("click", () => changeDirection({ keyCode: 40 }));
 function changeDirection(event){
     const keyPressed = event.keyCode;
     const LEFT = 37;
