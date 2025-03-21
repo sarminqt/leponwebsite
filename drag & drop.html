@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag & Drop</title>
+    <link rel="stylesheet" href="mystyle.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+        }
+        .container {
+            width: 100%;
+            min-height: 100vh;
+            background: url('https://cdn.pixabay.com/photo/2023/01/13/16/35/background-7716491_1280.png') no-repeat center/cover;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .box-container {
+            display: flex;
+            gap: 30px;
+        }
+        .box {
+            width: 500px;
+            min-height: 400px;
+            margin: 20px;
+            border: 2px dashed #fff;
+            padding: 10px;
+            text-align: center;
+            color: white;
+            font-size: 18px;
+        }
+        #options {
+            background: #1e1e1e;
+        }
+        #left {
+            background: url('can.jpg') no-repeat center/cover;
+        }
+        #right {
+            background: url('cant.jpg') no-repeat center/cover;
+        }
+        .list {
+            background: white;
+            height: 60px;
+            margin: 15px;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: grab;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="box-container">
+            <div id="options" class="box" ondragover="allowDrop(event)" ondrop="drop(event, 'options')">
+                <h2>Options</h2>
+                <div class="list cant" id="item7" draggable="true" ondragstart="drag(event)">Eat a Lot</div>
+                <div class="list can" id="item1" draggable="true" ondragstart="drag(event)">Drive Motorcycle</div>
+                <div class="list cant" id="item6" draggable="true" ondragstart="drag(event)">Swim</div>
+                <div class="list cant" id="item10" draggable="true" ondragstart="drag(event)">Run a Marathon</div>
+                <div class="list can" id="item2" draggable="true" ondragstart="drag(event)">Help Clean the House</div>
+                <div class="list can" id="item3" draggable="true" ondragstart="drag(event)">Cook</div>
+                <div class="list cant" id="item8" draggable="true" ondragstart="drag(event)">Love Matcha Flavor</div>
+                <div class="list can" id="item4" draggable="true" ondragstart="drag(event)">Make you Smile</div>
+                <div class="list can" id="item5" draggable="true" ondragstart="drag(event)">Solve Problems</div>
+                <div class="list cant" id="item9" draggable="true" ondragstart="drag(event)">Sleep 8 hours Daily</div>
+            </div>
+            <div id="left" class="box" ondragover="allowDrop(event)" ondrop="drop(event, 'left')">
+                <h2>What Charmaine Can?</h2>
+            </div>
+            <div id="right" class="box" ondragover="allowDrop(event)" ondrop="drop(event, 'right')">
+                <h2>What Charmaine Can't?</h2>
+            </div>
+        </div>
+    </div>
+    <script>
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.id);
+        }
+
+        function drop(event, category) {
+            event.preventDefault();
+            let data = event.dataTransfer.getData("text");
+            let draggedElement = document.getElementById(data);
+            let targetBox = document.getElementById(category);
+            
+            if ((category === "left" && draggedElement.classList.contains("can")) ||
+                (category === "right" && draggedElement.classList.contains("cant")) ||
+                category === "options") {
+                targetBox.appendChild(draggedElement);
+            } else {
+                alert("UYYYY SAYUUUPPP!");
+            }
+        }
+    </script>
+</body>
+</html>
